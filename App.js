@@ -1,47 +1,70 @@
-import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-
-export default function CounterApp(){
-  const [count, setCount] = useState(0);
-
-  const increment = () => {
-    setCount(count + 1);
+import React,{useState} from "react";
+import {View,Text,StyleSheet,Pressable,} from "react-native";
+export default function App(){
+  const [counter,setCounter]=useState(0);
+   const [tap,setTap]=useState(0);
+  const increment=()=>{
+    setCounter(counter+1);
+    totalCount();
+  };
+  const decrement=()=>{
+    setCounter(counter-1);
+    totalCount();
+  };
+  const totalCount=()=>{
+    setTap(tap+1);
+  };
+  const reset=()=>{
+   setCounter(0);
+  };
+  const resetTaps=()=>{
+     setTap(0);
   };
 
-  const decrement = () => {
-    setCount(count - 1);
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.counterText}>COUNTER VALUE : {count}</Text>
-    
-      <View style={styles.buttonContainer}>
-        <Button title="Increment" onPress={increment} />
-        <View style={styles.buttonSpacing} />
-        <Button title="Decrement" onPress={decrement} />
-      </View>
-    </View>
+  return(
+<View style={styles.container}>
+<Text style={styles.value}>The value of the counter is {counter} </Text>
+<Text style={styles.total}>Total Taps = {tap}</Text>
+<Pressable  style={styles.increment} onPress={increment}><Text style={{fontSize:20,left:50,top:10,}}>Increase</Text></Pressable>
+<Pressable style={styles.decrement} onPress={decrement} ><Text style={{fontSize:20,left:50,top:10}}>Decrease</Text></Pressable>
+<Pressable style={styles.reset} onPress={reset}><Text style={{fontSize:20,left:35}}>Reset</Text></Pressable>
+<Pressable style={styles.resetTaps} onPress={resetTaps}><Text style={{fontSize:20,left:20,}}>Reset Taps</Text></Pressable>
+ 
+</View>
   );
-};
+}
+const styles=StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor:"white"
+  },
+  increment:{
+   backgroundColor:"red",
+   borderRadius:10,width:150,height:50,
+   top:100,margin:20,top:500,
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+  decrement:{
+     backgroundColor:"red",
+   borderRadius:10,width:150,height:50,
+   top:100,margin:20,top:410,left:200,
+
+  },
+  value:{
+   fontSize:20,
+   top:300,left:75,
+  },
+  reset:{
     backgroundColor:"red",
+   borderRadius:10,width:150,height:50,
+   top:100,margin:20,top:410,left:110,
   },
-  counterText: {
-    fontSize: 20,
-    marginBottom: 20,
+  resetTaps:{
+backgroundColor:"red",
+   borderRadius:10,width:150,height:50,
+   top:100,margin:20,top:380,left:110,
   },
-  buttonContainer: {
-    flexDirection: 'row',
+  total:{
+    left:140,top:350,fontSize:15,
   },
-  buttonSpacing: {
-    width: 10,
-  },
-});
-
-
+})
